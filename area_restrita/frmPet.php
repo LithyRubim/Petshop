@@ -7,7 +7,7 @@
         
         $result = $conn->selectCrud("*", true, $_GET, "=");
 
-        foreach($result as $key=>$produtos){
+        foreach($result as $key=>$pet){
             $id = $pet->id;
             $id_dono = $pet->id_dono;
             $nome = $pet->nome;
@@ -75,7 +75,7 @@
                 <input type="text" id="raca" name="raca" class="form-control" value="<?php echo $raca ?>" />
                 <br> 
                 <label>Dono </label>
-                <select name="perfil" id="perfil" class="form-control" required>
+                <select name="dono" id="dono" class="form-control" required>
                     <option value=""> -- Selecione um perfil -- </option>
                     <?php
                         $conn = new Crud("usuarios");
