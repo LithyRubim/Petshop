@@ -13,7 +13,7 @@
 
     $users = $crud->selectCrud("*", true, $array_dados, "=");
 
-    if(!is_array($users)){
+    if(count($users) == 0){
         ?>
             <script>
                 alert("Usuário e/ou Senha incorretos!");

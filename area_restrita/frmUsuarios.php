@@ -41,28 +41,11 @@
 </head>
 <body class="bg-light">
     <div class="container">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
-        <a class="navbar-brand" href="javascript:void(0)">Site</a>
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navb">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navb">
-            <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="index.php">Notícias</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="./area_restrita">Área restrita</a>
-            </li>
-            </ul>
-            <form class="form-inline my-2 my-lg-0" method="GET" action="index.php">
-                <input class="form-control mr-sm-2" type="text" name="pesquisar" placeholder="Buscar...">
-                <button class="btn btn-success my-2 my-sm-0" type="submit">Pesquisar</button>
-            </form>
-        </div>
-        </nav>
-
+        <?php
+            if(isset($_SESSION['perfil']) && $_SESSION['perfil']==1){
+                include_once('incMenuAdm.php');
+            }
+        ?>
     </div>
 	<div class="container">
 		<div class="row">
@@ -92,16 +75,20 @@
                 <input type="password" id="password" name="r_senha" class="form-control" required />
                 <br>
                 <label>Perfil</label>
-                <select name="perfil" id="perfil" class="form-control" required>
+                <select name="perfil" id="perfil" class="form-control" required >
                     <option value=""> -- Selecione um perfil -- </option>
                     <?php
                         $conn = new Crud("perfil");
 
-                        $result = $conn->selectCrud("*", false);
+                        if($_GET['new']=="S"){
+                            $result = $conn->selectCrud("*", true, array('id'=>2));
+                        }else{
+                            $result = $conn->selectCrud("*", false);
+                        }
 
                         foreach($result as $key=>$perfil){
                             ?>
-                                <option value="<?php echo $perfil->id ?>"><?php echo $perfil->perfil ?></option>
+                                <option value="<?php echo $perfil->id ?>" <?php if($perfil->id == $perfil) { echo "selected"; } ?> ><?php echo $perfil->perfil ?></option>
                             <?php
                         }
                     ?>
