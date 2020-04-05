@@ -2,17 +2,17 @@
 
     include_once('../model/conexao.class.php');
 
-    $conn = new Crud("produtos");
+    $conn = new Crud("pet");
 
     $array_dados = array(
         'nome'=>$_POST['nome'],
-        'valor_unitario'=>$_POST['valor'],
-        'qtd_estoque'=>$_POST['estoque'],
-        
+        'idade'=>$_POST['idade'],
+        'raca'=>$_POST['raca'],
+        'id_dono'=>$_POST['dono']        
     );
 
     $array_id = array(
-        'id'=>$_POST['id']  
+        'id'=>$_POST['id']
     );
 
     if($_POST['id'] == ""){
@@ -24,15 +24,15 @@
     if(!$resultado){
         ?>
             <script>
-                alert("Erro ao inserir produto!");
-                window.location.href="frmProdutos.php";
+                alert("Erro ao inserir pet!");
+                window.location.href="frmPet.php";
             </script>
         <?php 
     }else{
         ?>
             <script>
-                alert("Produto inserido com sucesso!");
-                window.location.href="listProdutos.php";
+                alert("Pet cadastrado com sucesso!");
+                window.location.href="listPet.php";
             </script>
         <?php
     }
