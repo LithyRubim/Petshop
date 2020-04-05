@@ -34,8 +34,7 @@ create table pet(
     id_dono int(11) not null,
     nome varchar(60) not null,
     idade int(3) not null,
-    id_especie int(11) not null,
-    id_raca int(11) not null
+    raca varchar(255) not null
 );
 
 create table especie(

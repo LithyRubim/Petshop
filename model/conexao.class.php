@@ -78,7 +78,7 @@ class Crud extends Conexao {
         foreach($array_id as $indice => $valor){
             $id[] = $indice . " = :" . $indice;
         }
-        $sql = "DELETE FROM {$this->tabela} WHERE " . join(" = ", $id);      
+        $sql = "DELETE FROM {$this->tabela} WHERE " . join(" = ", $id);  
         $query = $this->conn->prepare($sql);     
         $query->execute($array_id);
         if($query->rowCount() > 0){
@@ -87,6 +87,20 @@ class Crud extends Conexao {
             return false;
         }
         $this->conn->close();
+    }
+
+    public function convertData($data){
+        if(strpos($data, "/")){
+            $data = explode("/", $data);
+            $data = join("-", array_reverse($data));
+            return $data;
+        }else{
+            if(strpos($data, "-")){
+                $data = explode("-", $data);
+                $data = join("/", array_reverse($data));
+                return $data;
+            }
+        }
     }
 
     
